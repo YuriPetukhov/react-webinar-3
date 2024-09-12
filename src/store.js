@@ -6,8 +6,8 @@ class Store {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
 
-    // Инициализируем список существующих кодов
-    this.existingCodes = new Set(this.state.list.map(item => item.code));
+    // Инициализируем максимальный код среди существующих записей
+    this.maxCode = Math.max(0, ...this.state.list.map(item => item.code));
 
     this.state.list = this.state.list.map(item => ({
       ...item,
@@ -50,12 +50,9 @@ class Store {
    * @returns {number}
    */
   generateUniqueCode() {
-    let newCode = 1;
-    while (this.existingCodes.has(newCode)) {
-      newCode += 1;
-    }
-    this.existingCodes.add(newCode);
-    return newCode;
+    // Увеличиваем максимальный код
+    this.maxCode += 1;
+    return this.maxCode;
   }
 
   /**
@@ -75,9 +72,6 @@ class Store {
    * @param code
    */
   deleteItem(code) {
-    // Удаляем код из набора существующих кодов
-    this.existingCodes.delete(code);
-
     this.setState({
       ...this.state,
       list: this.state.list.filter(item => item.code !== code),
