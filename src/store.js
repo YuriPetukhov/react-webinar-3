@@ -5,11 +5,13 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
-    this.nextCode = Math.max(0, ...this.state.list.map(item => item.code)) + 1; // Начинаем с максимального текущего кода + 1
+
+    // Инициализируем список существующих кодов
+    this.existingCodes = new Set(this.state.list.map(item => item.code));
 
     this.state.list = this.state.list.map(item => ({
       ...item,
-      selectionCount: item.selectionCount || 0, // Устанавливаем 0 если еще не определено
+      selectionCount: item.selectionCount || 0, // Устанавливаем 0, если еще не определено
     }));
   }
 
@@ -44,15 +46,28 @@ class Store {
   }
 
   /**
+   * Генерация уникального кода
+   * @returns {number}
+   */
+  generateUniqueCode() {
+    let newCode = 1;
+    while (this.existingCodes.has(newCode)) {
+      newCode += 1;
+    }
+    this.existingCodes.add(newCode);
+    return newCode;
+  }
+
+  /**
    * Добавление новой записи
    */
   addItem() {
-    // Добавляем запись с уникальным кодом и увеличиваем nextCode
+    const uniqueCode = this.generateUniqueCode();
+
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: this.nextCode, title: 'Новая запись', selectionCount: 0 }],
+      list: [...this.state.list, { code: uniqueCode, title: 'Новая запись', selectionCount: 0 }],
     });
-    this.nextCode += 1; // Увеличиваем счетчик для следующей записи
   }
 
   /**
@@ -60,6 +75,9 @@ class Store {
    * @param code
    */
   deleteItem(code) {
+    // Удаляем код из набора существующих кодов
+    this.existingCodes.delete(code);
+
     this.setState({
       ...this.state,
       list: this.state.list.filter(item => item.code !== code),
@@ -75,17 +93,16 @@ class Store {
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
-          // Если выделение включается, увеличиваем счетчик
           const newSelectionCount = item.selected ? item.selectionCount : item.selectionCount + 1;
           return {
             ...item,
             selected: !item.selected,
-            selectionCount: newSelectionCount
+            selectionCount: newSelectionCount,
           };
         }
         return {
           ...item,
-          selected: false, // Снимаем выделение с других записей
+          selected: false,
         };
       }),
     });
