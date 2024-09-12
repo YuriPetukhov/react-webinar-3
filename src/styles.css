@@ -44,10 +44,6 @@ body {
   background: #75aaf1;
   color: #fff;
 }
-.Item-selectionCount {
-  color: red;
-  font-size: 16px;
-}
 
 .Item-code {
   padding: 20px 10px 20px 20px;

@@ -3,17 +3,18 @@ import { createElement } from './utils.js';
 import './styles.css';
 
 /**
- * Функция для правильного склонения слова "раз"
- * @param {number} count - Количество выделений
- * @returns {string} - "раз" или "раза" в зависимости от числа
+ * Универсальная функция склонения
+ * @param {number} count - Количество
+ * @param {array} forms - Массив форм [единственное, несколько, много]
+ * @returns {string} - Правильная форма слова
  */
-function getPluralForm(count) {
+function getPluralForm(count, forms) {
   if (count % 10 === 1 && count % 100 !== 11) {
-    return 'раз';
+    return forms[0];
   } else if ([2, 3, 4].includes(count % 10) && ![12, 13, 14].includes(count % 100)) {
-    return 'раза';
+    return forms[1];
   } else {
-    return 'раз';
+    return forms[2];
   }
 }
 
@@ -44,12 +45,12 @@ function App({ store }) {
                 <div className="Item-code">{item.code}</div>
                 <div className="Item-title">
                   {item.title}
-                  {item.selectionCount > 0 && ( // Если выделяли хотя бы раз, выводим через слеш
+                  {item.selectionCount > 0 && (
                     <span className="Item-selectionCount">
-                      {' / Выделяли ' +
+                      {' | Выделяли ' +
                         item.selectionCount +
                         ' ' +
-                        getPluralForm(item.selectionCount)}
+                        getPluralForm(item.selectionCount, ['раз', 'раза', 'раз'])}
                     </span>
                   )}
                 </div>
