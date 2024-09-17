@@ -22,7 +22,7 @@ function CartModal({ cartItems, onClose, onRemoveAll }) {
               <span className="item-index">{index + 1}.</span>
               <span className="item-title">{item.title}</span>
               <span className="item-price">{formatPrice(item.price)} ₽</span>
-              <span className="item-quantity">{item.quantity} шт.</span>
+              <span className="item-quantity">{item.quantity} шт</span>
               <button className="remove-button" onClick={() => onRemoveAll(item.code)}>
                 Удалить
               </button>
