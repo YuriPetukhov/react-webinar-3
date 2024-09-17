@@ -1,4 +1,6 @@
 .List {
+  min-height: 61px;
+  font-size: 18px;
 }
 
 .List-item {

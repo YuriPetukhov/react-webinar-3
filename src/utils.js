@@ -25,28 +25,21 @@ export const generateCode = (function (start = 0) {
   return () => ++start;
 })();
 
+export function formatPrice(price) {
+  return price.toLocaleString('ru-RU'); // Форматируем число с пробелами между тысячами
+}
+
 /**
- * Генератор чисел с шагом 1
- * Вариант с генератором.
- * Сразу создаётся генератор и возвращается функция для получения следующего значения генератора
- * @returns {Number}
+ * Возвращает строку с количеством товаров и их стоимостью
+ * @param totalItems {Number} Количество товаров
+ * @param totalPrice {Number} Общая стоимость
+ * @returns {String} Строка с данными или "пусто"
  */
-export const generateCode1 = (function (start = 0) {
-  function* realGenerator(start) {
-    while (true) {
-      yield ++start;
-    }
+export function formatCartInfo(totalItems, totalPrice) {
+  if (totalItems === 0) {
+    return 'пусто';
   }
 
-  const gen = realGenerator(start);
-  return () => gen.next().value;
-})();
-
-/**
- * Генератор чисел с шагом 1
- * Вариант с использованием функции как объекта для хранения значения value
- * @returns {Number}
- */
-export function generateCode2() {
-  return generateCode2.value ? ++generateCode2.value : (generateCode2.value = 1);
+  // Если товары есть, возвращаем строку с количеством товаров и общей стоимостью
+  return `${totalItems} ${plural(totalItems, { one: 'товар', few: 'товара', many: 'товаров' })} / ${formatPrice(totalPrice)} ₽`;
 }
