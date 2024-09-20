@@ -1,14 +1,10 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { formatPrice } from '/utils';
+import Cart from '../cart';
 import './style.css';
 
-function CartModal({ cartItems, onClose, onRemoveAll }) {
-  const totalPrice = useMemo(
-    () => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0),
-    [cartItems],
-  );
-
+function CartModal({ cartItems, onClose, onRemoveAll, totalPrice }) {
   return (
     <div className="modal">
       <div className="modal-content">
@@ -16,19 +12,7 @@ function CartModal({ cartItems, onClose, onRemoveAll }) {
           <h1>Корзина</h1>
           <button onClick={onClose}>Закрыть</button>
         </div>
-        <ul>
-          {cartItems.map((item, index) => (
-            <li key={item.code} className="cart-item">
-              <span className="item-index">{index + 1}.</span>
-              <span className="item-title">{item.title}</span>
-              <span className="item-price">{formatPrice(item.price)} ₽</span>
-              <span className="item-quantity">{item.quantity} шт</span>
-              <button className="remove-button" onClick={() => onRemoveAll(item.code)}>
-                Удалить
-              </button>
-            </li>
-          ))}
-        </ul>
+        <Cart cartItems={cartItems} onRemoveAll={onRemoveAll} />
         <div className="modal-footer">
           <p className="total-label">Итого</p>
           <p className="total-price">{formatPrice(totalPrice)} ₽</p>
@@ -38,17 +22,13 @@ function CartModal({ cartItems, onClose, onRemoveAll }) {
   );
 }
 
+
 CartModal.propTypes = {
-  cartItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      code: PropTypes.number,
-      title: PropTypes.string,
-      quantity: PropTypes.number,
-      price: PropTypes.number,
-    }),
-  ).isRequired,
-  onClose: PropTypes.func,
-  onRemoveAll: PropTypes.func,
+  cartItems: PropTypes.array.isRequired,
+  totalPrice: PropTypes.number.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onRemoveAll: PropTypes.func.isRequired,
 };
+
 
 export default React.memo(CartModal);

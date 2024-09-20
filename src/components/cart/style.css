@@ -1,3 +1,4 @@
+/* Стили для модального окна */
 .modal {
     position: fixed;
     top: 0;
@@ -20,7 +21,6 @@
     max-height: 80vh;
     overflow-y: auto;
     border-radius: 10px;
-
 }
 
 .modal-header {
@@ -45,61 +45,52 @@
     margin-right: 15px;
 }
 
-ul {
+.Cart-list {
     list-style-type: none;
     padding: 0;
     margin-top: 67px;
     margin-bottom: 0;
 }
 
-li {
-    padding: 21px 20px;
-    border-bottom: 1px dashed #ccc;
-    align-items: center;
-}
-
-li:first-child {
-    border-top: 1px dashed #ccc;
-}
-
-.cart-item {
+.Cart-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 21px 20px;
     border-bottom: 1px dashed #ccc;
     font-family: Arial;
     font-size: 18px;
     font-weight: 400;
     text-align: left;
-
 }
 
-.cart-item .item-index {
+.Cart-item:first-child {
+    border-top: 1px dashed #ccc;
+}
+
+.Cart-index {
     text-align: left;
     font-weight: bold;
     font-size: 16px;
 }
 
-.cart-item .item-title {
+.Cart-title {
     flex-grow: 1;
     padding: 0 10px;
     font-size: 16px;
 }
 
-.cart-item .item-quantity {
+.Cart-quantity {
     width: 80px;
     text-align: center;
     padding-left: 40px;
 }
 
-.cart-item .item-price {
+.Cart-price {
     width: 100px;
     text-align: right;
 }
 
-.cart-item .remove-button {
-    width: 76px;
-}
 
 .modal-footer {
     padding-right: 20px;

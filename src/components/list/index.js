@@ -15,13 +15,16 @@ function List({ list, onAddToCart }) {
   );
 }
 
+
 List.propTypes = {
   list: PropTypes.arrayOf(
     PropTypes.shape({
       code: PropTypes.number.isRequired,
-    }),
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+    })
   ).isRequired,
   onAddToCart: PropTypes.func.isRequired,
 };
 
-export default React.memo(List);
+export default List;

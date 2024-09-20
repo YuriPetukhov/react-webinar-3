@@ -4,9 +4,9 @@ import { formatPrice } from '/utils';
 import './style.css';
 
 function Item({ item, onAddToCart }) {
-  const handleAddToCart = e => {
+  const handleAddToCart = (e) => {
     e.stopPropagation();
-    onAddToCart(item);
+    onAddToCart(item.code);
   };
 
   return (
@@ -20,6 +20,7 @@ function Item({ item, onAddToCart }) {
     </div>
   );
 }
+
 
 Item.propTypes = {
   item: PropTypes.shape({
