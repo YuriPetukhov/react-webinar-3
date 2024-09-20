@@ -20,7 +20,8 @@ class Store {
   }
 
   addItemToCart = code => {
-    const item = this.state.list.find(item => item.code === code);
+    const itemIndex = this.state.list.findIndex(item => item.code === code); // Находим индекс товара в начальном списке
+    const item = this.state.list[itemIndex]; // Находим сам товар
     if (!item) return;
 
     const existingItem = this.state.cartItems.find(cartItem => cartItem.code === code);
@@ -33,7 +34,7 @@ class Store {
         cartItem.code === code ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem,
       );
     } else {
-      newCartItems = [...this.state.cartItems, { ...item, quantity: 1 }];
+      newCartItems = [...this.state.cartItems, { ...item, quantity: 1, originalIndex: itemIndex }];
       totalItems += 1;
     }
 

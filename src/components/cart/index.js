@@ -9,9 +9,9 @@ function Cart({ cartItems, onRemoveAll }) {
 
   return (
     <ul className={cn('list')}>
-      {cartItems.map((item, index) => (
+      {cartItems.map(item => (
         <li key={item.code} className={cn('item')}>
-          <span className={cn('index')}>{index + 1}</span>
+          <span className={cn('index')}>{item.originalIndex + 1}</span>
           <span className={cn('title')}>{item.title}</span>
           <span className={cn('price')}>{formatPrice(item.price)} ₽</span>
           <span className={cn('quantity')}>{item.quantity} шт</span>
