@@ -1,24 +1,25 @@
-.Head {
-  height: 80px;
+.HeaderTitle {
   background: #f5f5f5;
+  padding: 20px;
 }
 
-.Head h1 {
+.HeaderTitle h1 {
   margin: 0;
-  padding: 20px 20px 10px;
   font-family: Arial;
   font-size: 32px;
   font-weight: 700;
   text-align: left;
-
 }
 
-.Head p {
+.CartInfoControls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+}
+
+.CartInfoControls p {
   margin: 0;
-  text-align: right;
-  padding-top: 34px;
-  padding-right: 115px;
-  padding-bottom: 25px;
-  border-bottom: 1px dashed #ccc;
   font-size: 18px;
+  padding-right: 15px;
 }

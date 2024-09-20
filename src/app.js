@@ -1,6 +1,5 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback } from 'react';
 import List from './components/list';
-import Controls from './components/controls';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
 import CartModal from './components/cart-modal';
@@ -24,8 +23,12 @@ function App({ store }) {
 
   return (
     <PageLayout>
-      <Head title="Магазин" totalItems={totalItems} totalPrice={totalPrice} />
-      <Controls onAdd={openModal} />
+      <Head 
+        title="Магазин" 
+        totalItems={totalItems} 
+        totalPrice={totalPrice} 
+        onAdd={openModal}
+      />
       <List list={list} onAddToCart={addToCart} />
 
       {isModalOpen && (
@@ -40,5 +43,6 @@ function App({ store }) {
   );
 }
 
-
 export default App;
+
+
