@@ -5,4 +5,5 @@
 
 .Controls button {
   width: 76px;
+  cursor: pointer;
 }

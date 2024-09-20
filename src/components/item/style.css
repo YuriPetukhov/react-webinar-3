@@ -3,26 +3,27 @@
   justify-content: flex-start;
   align-items: center;
   transition: background-color 1s;
-}
-
-.Item_selected {
-  background: #75aaf1;
-  color: #fff;
+  min-height: 60px;
 }
 
 .Item-code {
-  padding: 20px 10px 20px 20px;
+  padding: 0 10px 0 20px;
 }
 
 .Item-title {
   width: 100%;
-  padding: 20px 10px;
+  padding: 0 10px;
 }
 
 .Item-actions {
   display: flex;
   justify-content: flex-end;
-  padding: 20px 20px 20px 10px;
+  padding: 0 20px 0 10px;
+}
+
+.Item-actions button {
+  cursor: pointer;
+  width: 76px;
 }
 
 .Item-price {

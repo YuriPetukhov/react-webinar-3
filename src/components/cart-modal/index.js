@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { formatPrice } from '/utils';
 import Cart from '../cart';
@@ -22,13 +22,11 @@ function CartModal({ cartItems, onClose, onRemoveAll, totalPrice }) {
   );
 }
 
-
 CartModal.propTypes = {
   cartItems: PropTypes.array.isRequired,
   totalPrice: PropTypes.number.isRequired,
   onClose: PropTypes.func.isRequired,
   onRemoveAll: PropTypes.func.isRequired,
 };
-
 
 export default React.memo(CartModal);

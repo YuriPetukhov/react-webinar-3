@@ -1,7 +1,3 @@
-.List {
-  min-height: 61px;
-}
-
 .List-item {
   border-bottom: 1px dashed #ccc;
 }
@@ -12,8 +8,4 @@
 
 .Item-index, .Item-title {
   font-size: 16px;
-}
-
-.Item-quantity, .Item-price {
-  font-size: 18px;
 }

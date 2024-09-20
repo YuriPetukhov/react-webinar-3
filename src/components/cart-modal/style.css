@@ -20,7 +20,6 @@
     max-height: 80vh;
     overflow-y: auto;
     border-radius: 10px;
-
 }
 
 .modal-header {
@@ -37,80 +36,24 @@
     font-size: 32px;
     font-weight: 700;
     line-height: 36.8px;
-    text-align: left;
 }
 
 .modal-header button {
     width: 76px;
-    margin-right: 15px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 67px;
-    margin-bottom: 0;
-}
-
-li {
-    padding: 21px 20px;
-    border-bottom: 1px dashed #ccc;
-    align-items: center;
-}
-
-li:first-child {
-    border-top: 1px dashed #ccc;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px dashed #ccc;
-    font-family: Arial;
-    font-size: 18px;
-    font-weight: 400;
-    text-align: left;
-
-}
-
-.cart-item .item-index {
-    text-align: left;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.cart-item .item-title {
-    flex-grow: 1;
-    padding: 0 10px;
-    font-size: 16px;
-}
-
-.cart-item .item-quantity {
-    width: 80px;
-    text-align: center;
-    padding-left: 40px;
-}
-
-.cart-item .item-price {
-    width: 100px;
-    text-align: right;
-}
-
-.cart-item .remove-button {
-    width: 76px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .modal-footer {
     padding-right: 20px;
     padding-bottom: 90px;
-    background: #fff;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     font-weight: bold;
-    font-size: 18px;
-    gap: 55px;
+    font-weight: 700;
+    background: #fff;
+    gap: 62px;
 }
 
 .total-label {
@@ -119,5 +62,5 @@ li:first-child {
 
 .total-price {
     text-align: right;
-    padding-right: 96px;
+    padding-right: 100px;
 }
