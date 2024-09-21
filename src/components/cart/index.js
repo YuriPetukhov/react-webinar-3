@@ -1,26 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formatPrice } from '/utils';
-import { cn as bem } from '@bem-react/classname';
+import List from '../list';
 import './style.css';
 
 function Cart({ cartItems, onRemoveAll }) {
-  const cn = bem('Cart');
+  const renderCartInfo = item => (
+    <>
+      <span className="Cart-quantity">{item.quantity} шт</span>
+      <button className="Cart-remove-button" onClick={() => onRemoveAll(item.code)}>
+        Удалить
+      </button>
+    </>
+  );
 
   return (
-    <ul className={cn('list')}>
-      {cartItems.map(item => (
-        <li key={item.code} className={cn('item')}>
-          <span className={cn('index')}>{item.originalIndex + 1}</span>
-          <span className={cn('title')}>{item.title}</span>
-          <span className={cn('price')}>{formatPrice(item.price)} ₽</span>
-          <span className={cn('quantity')}>{item.quantity} шт</span>
-          <button className={cn('remove-button')} onClick={() => onRemoveAll(item.code)}>
-            Удалить
-          </button>
-        </li>
-      ))}
-    </ul>
+    <div className="Cart">
+      <List list={cartItems} onAddToCart={() => {}} renderItemInfo={renderCartInfo} />
+    </div>
   );
 }
 

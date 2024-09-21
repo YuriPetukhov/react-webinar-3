@@ -2,7 +2,8 @@ import React, { useState, useCallback } from 'react';
 import List from './components/list';
 import Head from './components/head';
 import PageLayout from './components/page-layout';
-import CartModal from './components/cart-modal';
+import Modal from './components/modal';
+import Cart from './components/cart';
 
 function App({ store }) {
   const { cartItems, totalItems, totalPrice } = store.getState();
@@ -26,12 +27,13 @@ function App({ store }) {
       <List list={list} onAddToCart={addToCart} />
 
       {isModalOpen && (
-        <CartModal
-          cartItems={cartItems}
-          totalPrice={totalPrice}
-          onClose={closeModal}
-          onRemoveAll={removeFromCart}
-        />
+        <Modal title="Корзина" onClose={closeModal}>
+          <Cart cartItems={cartItems} onRemoveAll={removeFromCart} />
+          <div className="Modal-footer">
+            <p className="Total-label">Итого</p>
+            <p className="Total-price">{totalPrice.toLocaleString('ru-RU')} ₽</p>
+          </div>
+        </Modal>
       )}
     </PageLayout>
   );
