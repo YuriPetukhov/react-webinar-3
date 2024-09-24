@@ -1,4 +1,3 @@
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
@@ -31,6 +30,12 @@ let config = {
           { loader: MiniCssExtractPlugin.loader, options: {} },
           { loader: 'css-loader', options: { url: true, import: true } },
         ],
+      },
+      // Правило для обработки JSON файлов (можно не добавлять, если не нужно)
+      {
+        test: /\.json$/,
+        type: 'javascript/auto',
+        loader: 'json-loader', // Необязательно в современных версиях Webpack
       },
     ],
   },

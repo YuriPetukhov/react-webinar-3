@@ -1,0 +1,34 @@
+{
+  "header": {
+    "home": "Главная"
+  },
+  "basket": {
+    "itemsInBasket": "В корзине:",
+    "productOne": "товар",
+    "productFew": "товара",
+    "productMany": "товаров",
+    "empty": "пусто",
+    "goToBasket": "Перейти",
+     "title": "Корзина",
+     "total": "Итого",
+     "close": "Закрыть"
+  },
+  "controls": {
+    "add": "Добавить",
+    "remove": "Удалить"
+  },
+  "currency": {
+    "rub": " ₽"
+  },
+  "main": {
+    "title": "Магазин"
+  },
+  "product": {
+    "loading": "Загрузка...",
+    "descriptionUnavailable": "Описание товара не доступно.",
+    "madeIn": "Страна производитель",
+    "category": "Категория",
+    "releaseYear": "Год выпуска",
+    "price": "Цена"
+  }
+}

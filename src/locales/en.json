@@ -1,0 +1,34 @@
+{
+  "header": {
+    "home": "Home"
+  },
+  "basket": {
+    "itemsInBasket": "Items in basket:",
+    "productOne": "item",
+    "productFew": "items",
+    "productMany": "items",
+    "empty": "empty",
+    "goToBasket": "Go to basket",
+    "title": "Basket",
+    "total": "Total",
+    "close": "Close"
+  },
+  "controls": {
+    "add": "Add",
+    "remove": "Remove"
+  },
+  "currency": {
+    "rub": " RUB"
+  },
+  "main": {
+    "title": "Store"
+  },
+  "product": {
+    "loading": "Loading...",
+    "descriptionUnavailable": "Description unavailable.",
+    "madeIn": "Made in",
+    "category": "Category",
+    "releaseYear": "Release year",
+    "price": "Price"
+  }
+}

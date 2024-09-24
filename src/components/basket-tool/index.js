@@ -2,37 +2,44 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat, plural } from '../../utils';
+import useSelector from '../../store/use-selector';
+import { Link } from 'react-router-dom';
+import { useTranslation } from '../../use-translation';
 import './style.css';
 
-function BasketTool({ sum, amount, onOpen }) {
+function BasketTool({ onOpen }) {
   const cn = bem('BasketTool');
+  const translate = useTranslation();
+
+  const select = useSelector(state => ({
+    sum: state.basket.sum,
+    amount: state.basket.amount,
+  }));
+
+  const { sum, amount } = select;
+
   return (
-    <div className={cn()}>
-      <span className={cn('label')}>В корзине:</span>
-      <span className={cn('total')}>
-        {amount
-          ? `${amount} ${plural(amount, {
-              one: 'товар',
-              few: 'товара',
-              many: 'товаров',
-            })} / ${numberFormat(sum)} ₽`
-          : `пусто`}
-      </span>
-      <button onClick={onOpen}>Перейти</button>
+    <div className={cn('container')}>
+      <Link to="/" className={cn('link')}>{translate('header.home')}</Link>
+      <div className={cn('content')}>
+        <span className={cn('label')}>{translate('basket.itemsInBasket')}</span>
+        <span className={cn('total')}>
+          {amount
+            ? `${amount} ${plural(amount, {
+                one: translate('basket.productOne'),
+                few: translate('basket.productFew'),
+                many: translate('basket.productMany'),
+              })} / ${numberFormat(sum)} ${translate('currency.rub')}`
+            : `${translate('basket.empty')}`}
+        </span>
+        <button onClick={onOpen}>{translate('basket.goToBasket')}</button>
+      </div>
     </div>
   );
 }
 
 BasketTool.propTypes = {
   onOpen: PropTypes.func.isRequired,
-  sum: PropTypes.number,
-  amount: PropTypes.number,
-};
-
-BasketTool.defaultProps = {
-  onOpen: () => {},
-  sum: 0,
-  amount: 0,
 };
 
 export default memo(BasketTool);

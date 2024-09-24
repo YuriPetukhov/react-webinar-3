@@ -13,3 +13,34 @@
   font-weight: bold;
   margin: 0 20px;
 }
+
+.BasketTool-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20.7px;
+}
+
+.BasketTool-link {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 18px;
+  margin: 20px;
+}
+
+.BasketTool-link:hover {
+  text-decoration: underline;
+}
+
+.BasketTool-content {
+  display: flex;
+  align-items: center;
+}
+
+.BasketTool-content button {
+  margin-right: 20px;
+}
+
