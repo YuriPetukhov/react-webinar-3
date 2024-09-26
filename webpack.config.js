@@ -10,7 +10,7 @@ let config = {
     filename: '[name].js', // Шаблон для названия файлов
     clean: true, // Очистить ./dist перед сборкой
   },
-  mode: process.env.NODE_ENV,
+  mode: process.env.NODE_ENV || 'development',
   resolve: {
     extensions: ['.js', '.jsx'], // расширения по умолчанию если не указаны в import
     modules: ['./', 'node_modules'], // Где искать файлы подключаемых модулей (пакетов)
@@ -30,12 +30,6 @@ let config = {
           { loader: MiniCssExtractPlugin.loader, options: {} },
           { loader: 'css-loader', options: { url: true, import: true } },
         ],
-      },
-      // Правило для обработки JSON файлов (можно не добавлять, если не нужно)
-      {
-        test: /\.json$/,
-        type: 'javascript/auto',
-        loader: 'json-loader', // Необязательно в современных версиях Webpack
       },
     ],
   },

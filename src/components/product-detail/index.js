@@ -46,12 +46,28 @@ function ProductDetail() {
       <div className="ProductDetails">
         <p>{product.description || translate('descriptionUnavailable')}</p>
         <ul>
-          <li>{translate('product.madeIn')}: {product.madeIn?.title || translate('unknown')}</li>
-          <li>{translate('product.category')}: {product.category?.title || translate('unknown')}</li>
-          <li>{translate('product.releaseYear')}: {product.edition  || translate('unknown')}</li>
-          <li>{translate('product.price')}: {product.price} {translate('currency.rub')}</li>
+          <li>
+            {translate('product.madeIn')}:{' '}
+            <strong>{product.madeIn?.title || translate('unknown')}</strong>
+          </li>
+          <li>
+            {translate('product.category')}:{' '}
+            <strong>{product.category?.title || translate('unknown')}</strong>
+          </li>
+          <li>
+            {translate('product.releaseYear')}:{' '}
+            <strong>{product.edition || translate('unknown')}</strong>
+          </li>
+          <li>
+            {translate('product.price')}:{' '}
+            <strong>
+              {product.price} {translate('currency.rub')}
+            </strong>
+          </li>
         </ul>
-        <button className="add-button" onClick={handleAddToBasket}>{translate('controls.add')}</button>
+        <button className="add-button" onClick={handleAddToBasket}>
+          {translate('controls.add')}
+        </button>
       </div>
     </div>
   );
