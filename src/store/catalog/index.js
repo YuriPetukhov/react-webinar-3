@@ -10,10 +10,15 @@ class Catalog extends StoreModule {
   }
 
   async load({ limit, skip }) {
-    const response = await fetch(`/api/v1/articles?limit=${limit}&skip=${skip}`);
+    const response = await fetch(
+      `/api/v1/articles?limit=${limit}&skip=${skip}&fields=items(_id,title,price),count`,
+    );
     const json = await response.json();
 
-    const totalCount = json.result.totalCount > 0 ? json.result.totalCount : 0;
+    console.log(json);
+
+    const totalCount = json.result.count || 0;
+    const items = json.result.items || [];
 
     this.setState(
       {

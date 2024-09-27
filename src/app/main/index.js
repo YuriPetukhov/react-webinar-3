@@ -17,6 +17,7 @@ function Main() {
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10; // Количество записей на странице
 
+
   useEffect(() => {
     // Загружаем данные при изменении страницы
     store.actions.catalog.load({ limit, skip: (currentPage - 1) * limit });
@@ -28,6 +29,8 @@ function Main() {
     sum: state.basket.sum,
     totalCount: state.catalog.totalCount, // общее количество товаров для пагинации
   }));
+
+  console.log('Total Count:', select.totalCount);
 
   const callbacks = {
     // Добавление в корзину
