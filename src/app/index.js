@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Main from './main';
-import ProductDetail from '../components/product-detail';
+import ProductDetail from './product-detail';
 import Basket from './basket';
 import useStore from '../store/use-store';
 import useSelector from '../store/use-selector';
-import { LanguageProvider } from '../language-context';
+import { LanguageProvider } from '../language-settings/language-context';
 
 /**
  * Приложение

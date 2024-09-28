@@ -7,7 +7,7 @@ import List from '../../components/list';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import Pagination from '../../components/pagination';
-import { useTranslation } from '../../use-translation';
+import { useTranslation } from '../../language-settings/use-translation';
 
 function Main() {
   const store = useStore();

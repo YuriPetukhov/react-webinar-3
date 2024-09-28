@@ -1,7 +1,7 @@
 import { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
-import { useTranslation } from '../../use-translation';
+import { useTranslation } from '../../language-settings/use-translation';
 import './style.css';
 
 function ModalLayout(props) {

@@ -2,14 +2,23 @@ import { codeGenerator } from '../../utils';
 import StoreModule from '../module';
 
 class Catalog extends StoreModule {
-  initState() {
+  constructor(store, name) {
+    super(store, name);
+    this.state = this.initState();
+  }
+
+  initState = () => {
     return {
       list: [],
       totalCount: 0,
     };
   }
 
-  async load({ limit, skip }) {
+  setState = (newState, actionDescription) => {
+    super.setState(newState, actionDescription);
+  }
+
+  load = async ({ limit, skip }) => {
     const response = await fetch(
       `/api/v1/articles?limit=${limit}&skip=${skip}&fields=items(_id,title,price),count`,
     );
@@ -23,12 +32,12 @@ class Catalog extends StoreModule {
     this.setState(
       {
         ...this.getState(),
-        list: json.result.items || [],
+        list: items,
         totalCount: totalCount,
       },
       'Загружены товары из АПИ',
     );
-  }
+  };
 }
 
 export default Catalog;

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Head from '../../components/head';
 import BasketTool from '../../components/basket-tool';
 import useStore from '../../store/use-store';
-import { useTranslation } from '../../use-translation';
+import { useTranslation } from '../../language-settings/use-translation';
 import './style.css';
 
 function ProductDetail() {

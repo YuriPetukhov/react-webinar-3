@@ -4,7 +4,7 @@ import { cn as bem } from '@bem-react/classname';
 import { numberFormat, plural } from '../../utils';
 import useSelector from '../../store/use-selector';
 import { Link } from 'react-router-dom';
-import { useTranslation } from '../../use-translation';
+import { useTranslation } from '../../language-settings/use-translation';
 import './style.css';
 
 function BasketTool({ onOpen }) {
