@@ -7,6 +7,8 @@ body {
 }
 
 .PageLayout {
+  display: flex;
+  flex-direction: column;
   max-width: 1024px;
   min-height: 100vh;
   margin: 0 auto;
@@ -15,11 +17,10 @@ body {
   box-shadow: 0 0 15px 5px #0000003b;
 }
 
-p {
-  margin-left: 20px;
+.PageLayout p {
+  margin-left: 30px;
   margin-right: 20px;
 }
 
-ul, li, .PageLayout button {
-  padding-left: 20px;
-}
+
+

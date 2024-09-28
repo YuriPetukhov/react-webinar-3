@@ -7,7 +7,6 @@ import { useTranslation } from '../../language-settings/use-translation';
 import PageLayout from '../../components/page-layout';
 import ProductDescription from '../../components/product-description';
 import ProductDetails from '../../components/product-details';
-import ProductPrice from '../../components/product-price';
 import ProductAddButton from '../../components/product-add-button';
 import './style.css';
 
@@ -49,11 +48,12 @@ function ProductDetail() {
       <BasketTool onOpen={handleGoToCart} />
       <ProductDescription description={product.description} />
       <ProductDetails
+      description={product.description}
         madeIn={product.madeIn?.title}
         category={product.category?.title}
         releaseYear={product.edition}
+        price={product.price}
       />
-      <ProductPrice price={product.price} />
       <ProductAddButton onAdd={handleAddToBasket} />
     </PageLayout>
   );

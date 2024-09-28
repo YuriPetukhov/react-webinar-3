@@ -1,20 +1,27 @@
 import { useTranslation } from '../../language-settings/use-translation';
+import './style.css';
 
-function ProductDetails({ madeIn, category, releaseYear }) {
+function ProductDetails({ madeIn, category, releaseYear, price }) {
   const translate = useTranslation();
 
   return (
-    <ul>
-      <li>
+    <div className="ProductDetails">
+      <div className="MadeIn">
         {translate('product.madeIn')}: <strong>{madeIn || translate('unknown')}</strong>
-      </li>
-      <li>
+      </div>
+      <div className="Category">
         {translate('product.category')}: <strong>{category || translate('unknown')}</strong>
-      </li>
-      <li>
+      </div>
+      <div className="RealiseYear">
         {translate('product.releaseYear')}: <strong>{releaseYear || translate('unknown')}</strong>
-      </li>
-    </ul>
+      </div>
+      <div className="ProductPrice">
+        {translate('product.price')}:{' '}
+        <strong>
+          {price} {translate('currency.rub')}
+        </strong>
+      </div>
+    </div>
   );
 }
 

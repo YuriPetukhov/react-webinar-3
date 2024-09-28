@@ -3,6 +3,11 @@
   justify-content: flex-start;
   transition: background-color 1s;
   padding-left: 10px;
+  height: 61px;
+}
+.Item :hover{
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .Item_selected {

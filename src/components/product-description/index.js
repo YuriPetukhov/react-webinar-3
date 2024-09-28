@@ -1,13 +1,14 @@
 import { useTranslation } from '../../language-settings/use-translation';
+import './style.css'; 
 
 function ProductDescription({ description }) {
   const translate = useTranslation();
 
   if (!description) {
-    return <p>{translate('descriptionUnavailable')}</p>;
+    return <div className='ProductDescription'>{translate('descriptionUnavailable')}</div>;
   }
 
-  return <p>{description}</p>;
+  return <div className='ProductDescription'>{description}</div>;
 }
 
 export default ProductDescription;
