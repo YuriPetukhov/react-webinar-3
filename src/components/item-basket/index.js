@@ -6,7 +6,7 @@ import { numberFormatByLanguage } from '../../utils';
 import { useTranslation } from '../../language-settings/use-translation';
 import './style.css';
 
-function ItemBasket({ item, onRemove, onClose, productLink }) {
+function ItemBasket({ item, onRemove, onClose }) {
   const cn = bem('ItemBasket');
   const navigate = useNavigate();
   const translate = useTranslation();
@@ -14,11 +14,11 @@ function ItemBasket({ item, onRemove, onClose, productLink }) {
 
   const handleItemClick = () => {
     onClose(); // Закрываем модальное окно перед навигацией
-    navigate(productLink || `/product/${item._id}`); // Переход на указанный адрес или по умолчанию
+    navigate(`/product/${item._id}`); // Переход на страницу товара
   };
 
   return (
-    <div className={cn()} onClick={handleItemClick}>
+    <div className={cn()} onClick={handleItemClick} style={{ cursor: 'pointer' }}>
       <div className={cn('title')}>{item.title}</div>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormatByLanguage(item.price, language)} ₽</div>
@@ -40,14 +40,13 @@ function ItemBasket({ item, onRemove, onClose, productLink }) {
 
 ItemBasket.propTypes = {
   item: PropTypes.shape({
-    _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    title: PropTypes.string,
-    price: PropTypes.number,
+    _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
     amount: PropTypes.number,
   }).isRequired,
   onRemove: PropTypes.func,
   onClose: PropTypes.func,
-  productLink: PropTypes.string,
 };
 
 ItemBasket.defaultProps = {
