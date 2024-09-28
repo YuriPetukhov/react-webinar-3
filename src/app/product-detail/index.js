@@ -1,16 +1,21 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Head from '../../components/head';
 import BasketTool from '../../components/basket-tool';
 import useStore from '../../store/use-store';
 import { useTranslation } from '../../language-settings/use-translation';
+import PageLayout from '../../components/page-layout';
+import ProductDescription from '../../components/product-description';
+import ProductDetails from '../../components/product-details';
+import ProductPrice from '../../components/product-price';
+import ProductAddButton from '../../components/product-add-button';
 import './style.css';
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
-  const store = useStore(); // Получаем доступ к хранилищу
+  const store = useStore();
   const translate = useTranslation();
 
   useEffect(() => {
@@ -29,10 +34,10 @@ function ProductDetail() {
     fetchProduct();
   }, [id]);
 
-  if (!product) return <div>{translate('product.loading')}</div>; // Переведенное сообщение о загрузке
+  if (!product) return <div>{translate('product.loading')}</div>;
 
   const handleAddToBasket = () => {
-    store.actions.basket.addToBasket(product._id); // Добавляем товар в корзину через store
+    store.actions.basket.addToBasket(product._id);
   };
 
   const handleGoToCart = () => {
@@ -40,37 +45,20 @@ function ProductDetail() {
   };
 
   return (
-    <div className="ProductDetail">
+    <PageLayout>
       <Head title={product.title} />
-      <BasketTool onOpen={handleGoToCart} /> {/* Передаем функцию перехода */}
-      <div className="ProductDetails">
-        <p>{product.description || translate('descriptionUnavailable')}</p>
-        <ul>
-          <li>
-            {translate('product.madeIn')}:{' '}
-            <strong>{product.madeIn?.title || translate('unknown')}</strong>
-          </li>
-          <li>
-            {translate('product.category')}:{' '}
-            <strong>{product.category?.title || translate('unknown')}</strong>
-          </li>
-          <li>
-            {translate('product.releaseYear')}:{' '}
-            <strong>{product.edition || translate('unknown')}</strong>
-          </li>
-          <li>
-            {translate('product.price')}:{' '}
-            <strong>
-              {product.price} {translate('currency.rub')}
-            </strong>
-          </li>
-        </ul>
-        <button className="add-button" onClick={handleAddToBasket}>
-          {translate('controls.add')}
-        </button>
-      </div>
-    </div>
+      <BasketTool onOpen={handleGoToCart} />
+      <ProductDescription description={product.description} />
+      <ProductDetails
+        madeIn={product.madeIn?.title}
+        category={product.category?.title}
+        releaseYear={product.edition}
+      />
+      <ProductPrice price={product.price} />
+      <ProductAddButton onAdd={handleAddToBasket} />
+    </PageLayout>
   );
 }
 
 export default ProductDetail;
+
