@@ -23,10 +23,14 @@ function Item({ item, onAdd = () => {}, productLink }) {
   const language = translate('currency.rub');
 
   return (
-    <div className={cn()} onClick={handleClick}>
-      <div className={cn('title')}>{item.title}</div>
+    <div className={cn()}>
+      <div className={cn('title')} onClick={handleClick}>
+        {item.title}
+      </div>
       <div className={cn('actions')}>
-        <div className={cn('price')}>{numberFormatByLanguage(item.price, language)} {language}</div>
+        <div className={cn('price')}>
+          {numberFormatByLanguage(item.price, language)} {language}
+        </div>
         <button onClick={handleAddToCart}>{translate('controls.add')}</button>
       </div>
     </div>

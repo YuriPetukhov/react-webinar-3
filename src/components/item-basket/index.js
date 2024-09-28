@@ -18,8 +18,10 @@ function ItemBasket({ item, onRemove, onClose }) {
   };
 
   return (
-    <div className={cn()} onClick={handleItemClick} style={{ cursor: 'pointer' }}>
-      <div className={cn('title')}>{item.title}</div>
+    <div className={cn()}>
+      <div className={cn('title')} onClick={handleItemClick} style={{ cursor: 'pointer' }}>
+        {item.title}
+      </div>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormatByLanguage(item.price, language)} ₽</div>
         <div className={cn('cell')}>{numberFormatByLanguage(item.amount || 0, language)} шт</div>
