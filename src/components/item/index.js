@@ -6,12 +6,12 @@ import { numberFormat } from '../../utils';
 import { useTranslation } from '../../language-settings/use-translation';
 import './style.css';
 
-function Item({ item, onAdd = () => {} }) {
+function Item({ item, onAdd = () => {}, productLink }) {
   const cn = bem('Item');
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/product/${item._id}`); // Переход на страницу товара
+    navigate(productLink || `/product/${item._id}`); // Переход на указанный адрес или по умолчанию
   };
 
   const handleAddToCart = (e) => {
@@ -25,7 +25,7 @@ function Item({ item, onAdd = () => {} }) {
     <div className={cn()} onClick={handleClick}>
       <div className={cn('title')}>{item.title}</div>
       <div className={cn('actions')}>
-        <div className={cn('price')}>{numberFormat(item.price)}{translate('currency.rub')}</div>
+        <div className={cn('price')}>{numberFormat(item.price)} {translate('currency.rub')}</div>
         <button onClick={handleAddToCart}>{translate('controls.add')}</button>
       </div>
     </div>
@@ -39,6 +39,7 @@ Item.propTypes = {
     price: PropTypes.number.isRequired,
   }).isRequired,
   onAdd: PropTypes.func,
+  productLink: PropTypes.string, // Новое свойство
 };
 
 export default memo(Item);

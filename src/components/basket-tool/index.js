@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat, plural } from '../../utils';
 import useSelector from '../../store/use-selector';
-import { Link } from 'react-router-dom';
 import { useTranslation } from '../../language-settings/use-translation';
+import MainMenu from '../main-menu';
 import './style.css';
 
 function BasketTool({ onOpen }) {
@@ -20,7 +20,7 @@ function BasketTool({ onOpen }) {
 
   return (
     <div className={cn('container')}>
-      <Link to="/" className={cn('link')}>{translate('header.home')}</Link>
+      <MainMenu />
       <div className={cn('content')}>
         <span className={cn('label')}>{translate('basket.itemsInBasket')}</span>
         <span className={cn('total')}>

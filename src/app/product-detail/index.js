@@ -14,27 +14,26 @@ import './style.css';
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState(null);
   const store = useStore();
   const translate = useTranslation();
+  const [productDetailState, setProductDetailState] = useState(() => store.getState().productDetailState);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const response = await fetch(
-        `/api/v1/articles/${id}?fields=*,madeIn(title,code),category(title)`,
-      );
-      const data = await response.json();
-      if (data.result) {
-        setProduct(data.result);
-      } else {
-        console.error('Product data not found in the response:', data);
-      }
+    const updateState = () => {
+      setProductDetailState(store.getState().productDetailState);
     };
 
-    fetchProduct();
-  }, [id]);
+    const unsubscribe = store.subscribe(updateState);
+    store.actions.productDetailState.fetchProduct(id);
 
-  if (!product) return <div>{translate('product.loading')}</div>;
+    return () => unsubscribe();
+  }, [id, store.actions.productDetailState]);
+
+  const { product, isLoading, error } = productDetailState;
+
+  if (isLoading) return <div>{translate('product.loading')}</div>;
+  if (error) return <div>{translate('product.error', { error })}</div>;
+  if (!product) return null;
 
   const handleAddToBasket = () => {
     store.actions.basket.addToBasket(product._id);
@@ -61,4 +60,3 @@ function ProductDetail() {
 }
 
 export default ProductDetail;
-

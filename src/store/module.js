@@ -17,13 +17,19 @@ class StoreModule {
   }
 
   setState(newState, description = 'setState') {
-    this.store.setState(
-      {
-        ...this.store.getState(),
-        [this.name]: newState,
-      },
-      description,
-    );
+    const updateFunction = typeof newState === 'function'
+      ? newState
+      : () => newState;
+
+    this.store.setState(prevState => {
+      return {
+        ...prevState,
+        [this.name]: {
+          ...prevState[this.name],
+          ...updateFunction(prevState[this.name])
+        }
+      };
+    }, description);
   }
 }
 

@@ -6,33 +6,31 @@ import { numberFormat } from '../../utils';
 import { useTranslation } from '../../language-settings/use-translation';
 import './style.css';
 
-function ItemBasket(props) {
+function ItemBasket({ item, onRemove, onClose, productLink }) {
   const cn = bem('ItemBasket');
   const navigate = useNavigate();
   const translate = useTranslation();
 
-  const callbacks = {
-    // Удаление товара
-    onRemove: e => {
-      e.stopPropagation(); // Предотвращаем всплытие события
-      props.onRemove(props.item._id);
-    },
-
-    // Переход на страницу товара
-    onItemClick: () => {
-      props.onClose(); // Закрываем модальное окно перед навигацией
-      navigate(`/product/${props.item._id}`); // Навигация на страницу товара
-    },
+  const handleItemClick = () => {
+    onClose(); // Закрываем модальное окно перед навигацией
+    navigate(productLink || `/product/${item._id}`); // Переход на указанный адрес или по умолчанию
   };
 
   return (
-    <div className={cn()} onClick={callbacks.onItemClick}>
-      <div className={cn('title')}>{props.item.title}</div>
+    <div className={cn()} onClick={handleItemClick}>
+      <div className={cn('title')}>{item.title}</div>
       <div className={cn('right')}>
-        <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
-        <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} шт</div>
+        <div className={cn('cell')}>{numberFormat(item.price)} ₽</div>
+        <div className={cn('cell')}>{numberFormat(item.amount || 0)} шт</div>
         <div className={cn('cell')}>
-          <button onClick={callbacks.onRemove}>{translate('controls.remove')}</button>
+          <button
+            onClick={e => {
+              e.stopPropagation();
+              onRemove(item._id);
+            }}
+          >
+            {translate('controls.remove')}
+          </button>
         </div>
       </div>
     </div>
@@ -47,12 +45,13 @@ ItemBasket.propTypes = {
     amount: PropTypes.number,
   }).isRequired,
   onRemove: PropTypes.func,
-  onClose: PropTypes.func, // Добавляем onClose для закрытия модалки
+  onClose: PropTypes.func,
+  productLink: PropTypes.string,
 };
 
 ItemBasket.defaultProps = {
   onRemove: () => {},
-  onClose: () => {}, // По умолчанию пустая функция
+  onClose: () => {},
 };
 
 export default memo(ItemBasket);
