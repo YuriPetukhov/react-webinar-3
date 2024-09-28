@@ -1,8 +1,11 @@
 import { useTranslation } from '../../language-settings/use-translation';
+import { numberFormatByLanguage } from '../../utils';
 import './style.css';
 
 function ProductDetails({ madeIn, category, releaseYear, price }) {
   const translate = useTranslation();
+
+  const language = translate('currency.rub');
 
   return (
     <div className="ProductDetails">
@@ -18,7 +21,7 @@ function ProductDetails({ madeIn, category, releaseYear, price }) {
       <div className="ProductPrice">
         {translate('product.price')}:{' '}
         <strong>
-          {price} {translate('currency.rub')}
+          {numberFormatByLanguage(price, language)} {language}
         </strong>
       </div>
     </div>

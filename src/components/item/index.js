@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
-import { numberFormat } from '../../utils';
+import { numberFormatByLanguage } from '../../utils';
 import { useTranslation } from '../../language-settings/use-translation';
 import './style.css';
 
@@ -20,12 +20,13 @@ function Item({ item, onAdd = () => {}, productLink }) {
   };
 
   const translate = useTranslation();
+  const language = translate('currency.rub');
 
   return (
     <div className={cn()} onClick={handleClick}>
       <div className={cn('title')}>{item.title}</div>
       <div className={cn('actions')}>
-        <div className={cn('price')}>{numberFormat(item.price)} {translate('currency.rub')}</div>
+        <div className={cn('price')}>{numberFormatByLanguage(item.price, language)} {language}</div>
         <button onClick={handleAddToCart}>{translate('controls.add')}</button>
       </div>
     </div>
