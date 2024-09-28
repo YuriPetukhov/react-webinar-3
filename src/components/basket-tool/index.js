@@ -12,10 +12,14 @@ function BasketTool({ onOpen }) {
   const translate = useTranslation();
   const language = translate('currency.rub');
 
-  const select = useSelector(state => ({
-    sum: state.basket.sum,
-    amount: state.basket.amount,
-  }));
+  const select = useSelector(state => {
+    const result = {
+      sum: state.basket.sum,
+      amount: state.basket.amount,
+    };
+    console.log("Selector result:", result);
+    return result;
+  });
 
   const { sum, amount } = select;
 
