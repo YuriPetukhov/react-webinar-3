@@ -29,3 +29,12 @@
     width: 53px;
     height: 21px;
 }
+
+.error {
+    color: #FF0000;
+    font-family: Arial, sans-serif;
+    width: 203px;
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  

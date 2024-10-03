@@ -23,9 +23,10 @@ function LoginForm({ login, setLogin, password, setPassword, error, handleLogin 
           required
         />
 
+        {error && <p className="error">{error}</p>}
+
         <button type="submit">Войти</button>
       </form>
-      {error && <p className="error">{error}</p>}
     </div>
   );
 }
