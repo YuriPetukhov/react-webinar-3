@@ -19,6 +19,6 @@ Content-Type: application/json
 ###
 # Свой профиль
 
-GET http://query.rest/api/v1/users/self?fields=*
+GET http://query.rest/api/v1/users/f6709e18555f5597a5931ba945de8d37478a6f4d0c6d63d8743dc318965adf18?fields=_id%2Cemail%2Cprofile%28name%29*
 X-Token: de9911233f62807e70a6b02329c0c60e6115c8032e2f8cd082ff64ff42d224d9
 Content-Type: application/json

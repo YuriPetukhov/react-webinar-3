@@ -1,0 +1,16 @@
+.Login, .LogOut {
+  height: 41px;
+  background: white;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0 15px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.login-button, .logout-button {
+  height: 21px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
