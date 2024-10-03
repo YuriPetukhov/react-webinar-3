@@ -22,9 +22,12 @@ function LoginPage() {
       localStorage.setItem('token', token);
       navigate('/profile');
     } catch (err) {
+      console.error('Login error:', err);
       setError('Произошла ошибка. Пожалуйста, попробуйте еще раз.');
     }
   };
+  
+  
 
   return (
     <PageLayout>

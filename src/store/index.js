@@ -17,7 +17,8 @@ class Store {
     this.actions = {};
     for (const name of Object.keys(modules)) {
       this.actions[name] = new modules[name](this, name);
-      this.state[name] = this.actions[name].initState();
+      const savedState = localStorage.getItem(`store_${name}`);
+      this.state[name] = savedState ? JSON.parse(savedState) : this.actions[name].initState();
     }
   }
 
@@ -65,6 +66,10 @@ class Store {
     this.state = newState;
     // Вызываем всех слушателей
     for (const listener of this.listeners) listener(this.state);
+
+    for (const name of Object.keys(newState)) {
+      localStorage.setItem(`store_${name}`, JSON.stringify(newState[name]));
+    }
   }
 }
 

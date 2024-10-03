@@ -5,11 +5,17 @@ import StoreModule from '../module';
  */
 class BasketState extends StoreModule {
   initState() {
-    return {
+    const savedBasket = localStorage.getItem('basket');
+    return savedBasket ? JSON.parse(savedBasket) : {
       list: [],
       sum: 0,
       amount: 0,
     };
+  }
+
+  setState(newState, description = 'setState') {
+    super.setState(newState, description);
+    localStorage.setItem('basket', JSON.stringify(newState));
   }
 
   /**

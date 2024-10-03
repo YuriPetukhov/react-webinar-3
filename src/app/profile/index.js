@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../store/auth-cont';
 import LoginButton from '../../components/login';
@@ -9,22 +9,43 @@ import LocaleSelect from '../../containers/locale-select';
 import ProfileDetails from '../../components/profile-details';
 
 function ProfilePage() {
-const { user, token, logout } = useAuth();
-const [error, setError] = useState('');
-const navigate = useNavigate();
+  const { user, token, logout } = useAuth();
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+    }
+  }, [token, navigate]);
 
-return (
-<PageLayout>
-<LoginButton/>
-<Head title="Магазин">
-<LocaleSelect />
-</Head>
-<Navigation />
-{error && <div>{error}</div>}
-{user && <ProfileDetails profileData={user} />}
-</PageLayout>
-);
+  if (!user) {
+    return (
+      <PageLayout>
+        <Head title="Загрузка...">
+          <LocaleSelect />
+        </Head>
+        <Navigation />
+        <div>Загрузка профиля...</div>
+      </PageLayout>
+    );
+  }
+
+  return (
+    <PageLayout>
+      <LoginButton />
+      <Head title="Магазин">
+        <LocaleSelect />
+      </Head>
+      <Navigation />
+      {error && <div className="error">{error}</div>}
+      {user && (
+        <>
+          <ProfileDetails profileData={user} />
+        </>
+      )}
+    </PageLayout>
+  );
 }
 
 export default ProfilePage;
