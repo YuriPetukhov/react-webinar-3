@@ -2,11 +2,13 @@ import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../store/auth-cont';
 import UserLink from '../user-link';
+import useTranslate from '../../hooks/use-translate';
 import './style.css';
 
 function LoginButton() {
   const navigate = useNavigate();
   const { isAuthenticated, login, logout } = useAuth();
+  const { t } = useTranslate();
 
   if (isAuthenticated) {
     return (
@@ -16,7 +18,7 @@ function LoginButton() {
           await logout();
           navigate('/login');
         }} className="logout-button">
-          Выйти
+          {t('login.logout')}
         </button>
       </div>
     );
@@ -24,7 +26,7 @@ function LoginButton() {
     return (
       <div className="Login">
         <button onClick={() => navigate('/login')} className="login-button">
-          Вход
+        {t('login.login')}
         </button>
       </div>
     );

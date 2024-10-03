@@ -102,7 +102,7 @@ function CatalogFilter() {
     ),
     categories: useMemo(
       () => [
-        { value: '', title: 'Все' },  // Значение для всех категорий
+        { value: '', title: 'Все' },
         ...categories.map(category => ({
           value: category._id,
           title: category.title,

@@ -12,6 +12,15 @@
   "article.add": "Add",
   "filter.reset": "Reset",
   "filter.search": "Search",
+  "login.field": "Login",
+  "login.password": "Password",
+  "login.button": "Log In",
+  "login.login": "Login",
+  "login.logout": "Log out",
+  "profile.not-provided": "Not provided",
+  "profile.title": "Profile",
+  "profile.name": "Name",
+  "profile.phone": "Phone",
   "basket.articles": {
     "one": "article",
     "other": "articles"

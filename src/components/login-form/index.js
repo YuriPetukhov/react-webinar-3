@@ -1,11 +1,13 @@
+import useTranslate from '../../hooks/use-translate';
 import './style.css';
 
 function LoginForm({ login, setLogin, password, setPassword, error, handleLogin }) {
+  const { t } = useTranslate();
   return (
     <div className="login-page">
-      <h2>Вход</h2>
+      <h2>{t('login.login')}</h2>
       <form onSubmit={handleLogin} className="login-form">
-        <label htmlFor="login">Логин</label>
+        <label htmlFor="login">{t('login.field')}</label>
         <input
           id="login"
           type="text"
@@ -14,7 +16,7 @@ function LoginForm({ login, setLogin, password, setPassword, error, handleLogin 
           required
         />
 
-        <label htmlFor="password">Пароль</label>
+        <label htmlFor="password">{t('login.password')}</label>
         <input
           id="password"
           type="password"
@@ -25,7 +27,7 @@ function LoginForm({ login, setLogin, password, setPassword, error, handleLogin 
 
         {error && <p className="error">{error}</p>}
 
-        <button type="submit">Войти</button>
+        <button type="submit">{t('login.button')}</button>
       </form>
     </div>
   );

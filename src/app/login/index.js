@@ -7,6 +7,7 @@ import Head from '../../components/head';
 import Navigation from '../../containers/navigation';
 import LocaleSelect from '../../containers/locale-select';
 import LoginButton from '../../components/login';
+import useTranslate from '../../hooks/use-translate';
 
 function LoginPage() {
   const [login, setLogin] = useState('');
@@ -14,8 +15,9 @@ function LoginPage() {
   const [error, setError] = useState('');
   const { login: authLogin } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = async e => {
     e.preventDefault();
     try {
       const token = await authLogin(login, password);
@@ -26,13 +28,11 @@ function LoginPage() {
       setError('Произошла ошибка. Пожалуйста, попробуйте еще раз.');
     }
   };
-  
-  
 
   return (
     <PageLayout>
       <LoginButton />
-      <Head title="Магазин">
+      <Head title={t('title')}>
         <LocaleSelect />
       </Head>
       <Navigation />

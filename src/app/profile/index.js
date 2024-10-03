@@ -7,11 +7,13 @@ import Head from '../../components/head';
 import Navigation from '../../containers/navigation';
 import LocaleSelect from '../../containers/locale-select';
 import ProfileDetails from '../../components/profile-details';
+import useTranslate from '../../hooks/use-translate';
 
 function ProfilePage() {
   const { user, token, logout } = useAuth();
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { t } = useTranslate();
 
   useEffect(() => {
     if (!token) {
@@ -34,7 +36,7 @@ function ProfilePage() {
   return (
     <PageLayout>
       <LoginButton />
-      <Head title="Магазин">
+      <Head title={t('title')}>
         <LocaleSelect />
       </Head>
       <Navigation />
