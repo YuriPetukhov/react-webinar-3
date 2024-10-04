@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { StoreContext } from '../../store/context';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../store/auth-cont';
 import LoginButton from '../../components/login';
 import PageLayout from '../../components/page-layout';
 import Head from '../../components/head';
@@ -8,29 +8,32 @@ import Navigation from '../../containers/navigation';
 import LocaleSelect from '../../containers/locale-select';
 import ProfileDetails from '../../components/profile-details';
 import useTranslate from '../../hooks/use-translate';
+import Spinner from '../../components/spinner';
 
 function ProfilePage() {
-  const { user, token, logout } = useAuth();
+  const store = useContext(StoreContext);
+  const [authState, setAuthState] = useState(store.getState().auth);
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslate();
 
   useEffect(() => {
-    if (!token) {
-      navigate('/login');
-    }
-  }, [token, navigate]);
+    const unsubscribe = store.subscribe(() => {
+      setAuthState(store.getState().auth);
+    });
+    return unsubscribe;
+  }, [store]);
 
-  if (!user) {
-    return (
-      <PageLayout>
-        <Head title="Загрузка...">
-          <LocaleSelect />
-        </Head>
-        <Navigation />
-        <div>Загрузка профиля...</div>
-      </PageLayout>
-    );
+  useEffect(() => {
+    if (!authState.isAuthenticated && !authState.token) {
+      navigate('/login');
+    } else if (!authState.user) {
+      store.actions.auth.checkAuth();
+    }
+  }, [authState, navigate, store.actions.auth]);
+
+  if (!authState.isAuthenticated && !authState.token) {
+    return null;
   }
 
   return (
@@ -41,11 +44,13 @@ function ProfilePage() {
       </Head>
       <Navigation />
       {error && <div className="error">{error}</div>}
-      {user && (
-        <>
-          <ProfileDetails profileData={user} />
-        </>
-      )}
+      <Spinner active={authState.loading}>
+        {authState.user ? (
+          <ProfileDetails profileData={authState.user} />
+        ) : (
+          <div>Пожалуйста, войдите в систему</div>
+        )}
+      </Spinner>
     </PageLayout>
   );
 }

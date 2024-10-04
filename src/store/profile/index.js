@@ -11,7 +11,7 @@ class ProfileState extends StoreModule {
 
   async fetchProfile(token) {
     this.setState({ waiting: true, error: null });
-    console.log("Token 2", token);
+    console.log('Token 2', token);
 
     try {
       const response = await fetch('/api/v1/users/self?fields=_id,email,profile(name,phone', {

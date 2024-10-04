@@ -33,3 +33,35 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+/**
+ * Форматирование списка категорий в иерархическую структуру с отступами
+ * @param {Array} categories - Плоский список категорий
+ * @returns {Array} Отформатированный список категорий с иерархией и отступами
+ */
+
+export function formatCategories(categories) {
+  const categoryMap = {};
+
+  categories.forEach(cat => {
+    categoryMap[cat._id] = { ...cat, children: [] };
+  });
+
+  categories.forEach(cat => {
+    if (cat.parent && categoryMap[cat.parent._id]) {
+      categoryMap[cat.parent._id].children.push(categoryMap[cat._id]);
+    }
+  });
+
+  const formatWithIndent = (cat, level = 0) => {
+    if (!cat || !cat.children) return [];
+    return [
+      { _id: cat._id, title: '- '.repeat(level) + ' ' + cat.title },
+      ...cat.children.flatMap(child => formatWithIndent(child, level + 1)),
+    ];
+  };
+
+  return Object.values(categoryMap)
+    .filter(cat => !cat.parent)
+    .flatMap(cat => formatWithIndent(cat));
+}

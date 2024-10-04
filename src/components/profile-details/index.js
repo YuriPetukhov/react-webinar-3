@@ -8,15 +8,14 @@ function ProfileDetails({ profileData }) {
     <div className="ProfileDetails">
       <h2>{t('profile.title')}</h2>
       <p>
-        <strong>{t('profile.name')}:</strong>{' '}
-        {profileData.profile.name || t('profile.not-provided')}
+        {t('profile.name')}:<strong>{profileData.profile.name || t('profile.not-provided')}</strong>
       </p>
       <p>
-        <strong>{t('profile.phone')}:</strong>{' '}
-        {profileData.profile.phone || t('profile.not-provided')}
+        {t('profile.phone')}:
+        <strong>{profileData.profile.phone || t('profile.not-provided')}</strong>
       </p>
       <p>
-        <strong>Email:</strong> {profileData.email || t('profile.not-provided')}
+        email: <strong>{profileData.email || t('profile.not-provided')}</strong>
       </p>
     </div>
   );

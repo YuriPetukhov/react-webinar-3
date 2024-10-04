@@ -1,3 +1,21 @@
 .ProfileDetails {
-    margin-left: 20px;
+    padding: 17px 20px;
+}
+
+.ProfileDetails h2 {
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.ProfileDetails p {
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 18px;
+}
+
+.ProfileDetails strong {
+    padding-left: 5px;
+    font-weight: bold;
+    padding-right: 10px;
 }

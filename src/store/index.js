@@ -12,13 +12,19 @@ class Store {
      * catalog: CatalogState,
      * modals: ModalsState,
      * article: ArticleState,
-     * locale: LocaleState
+     * locale: LocaleState,
+     * auth: AuthState
      * }} */
     this.actions = {};
     for (const name of Object.keys(modules)) {
       this.actions[name] = new modules[name](this, name);
-      const savedState = localStorage.getItem(`store_${name}`);
-      this.state[name] = savedState ? JSON.parse(savedState) : this.actions[name].initState();
+      this.state[name] = this.actions[name].initState();
+    }
+
+    // Восстанавливаем только токен из localStorage
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.state.auth = { ...this.state.auth, token };
     }
   }
 
@@ -37,13 +43,7 @@ class Store {
 
   /**
    * Выбор состояния
-   * @returns {{
-   * basket: Object,
-   * catalog: Object,
-   * modals: Object,
-   * article: Object,
-   * locale: Object
-   * }}
+   * @returns {Object}
    */
   getState() {
     return this.state;
@@ -67,8 +67,11 @@ class Store {
     // Вызываем всех слушателей
     for (const listener of this.listeners) listener(this.state);
 
-    for (const name of Object.keys(newState)) {
-      localStorage.setItem(`store_${name}`, JSON.stringify(newState[name]));
+    // Сохраняем только токен в localStorage
+    if (newState.auth && newState.auth.token) {
+      localStorage.setItem('token', newState.auth.token);
+    } else {
+      localStorage.removeItem('token');
     }
   }
 }

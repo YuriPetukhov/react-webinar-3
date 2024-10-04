@@ -1,28 +1,17 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { StoreContext } from '../store/context';
 import useSelector from '../hooks/use-selector';
 import Main from './main';
 import Basket from './basket';
 import Article from './article';
 import LoginPage from './login';
 import ProfilePage from './profile';
-import { useAuth } from '../store/auth-cont';
+import ProtectedRoute from '../components/protected-route';
 
-/**
- * Приложение
- * Маршрутизация по страницам и модалкам
- */
 function App() {
-  const { isAuthenticated, token } = useAuth();
+  const store = useContext(StoreContext);
   const activeModal = useSelector(state => state.modals.name);
-
-  // Компонент для защищенных маршрутов
-  const ProtectedRoute = ({ children }) => {
-    if (!isAuthenticated) {
-      return <Navigate to="/login" replace />;
-    }
-    return children;
-  };
 
   return (
     <>

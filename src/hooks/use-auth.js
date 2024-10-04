@@ -1,58 +1,41 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
+import { StoreContext } from './store/context';
 
-const useAuth = () => {
-    const [user, setUser] = useState(null);
-    const navigate = useNavigate();
+class UseAuth {
+  constructor(store) {
+    this.store = store;
+  }
 
-    const [token, setToken] = useState(() => {
-        const storedToken = localStorage.getItem('authToken');
-        if (storedToken) {
-          console.log('Токен восстановлен из localStorage:', storedToken);
-          return storedToken;
-        }
-        return null;
-      });
-  
-    const login = async (credentials) => {
-      try {
-        const response = await axios.post('/api/v1/users/sign', credentials);
-        const newToken = response.data.result.token;
-        setToken(newToken);
-        localStorage.setItem('authToken', newToken);
-        // Получение данных пользователя после успешного входа
-        await fetchUser(newToken);
-      } catch (error) {
-        console.error('Ошибка входа:', error);
-        throw error;
-      }
-    };
-  
-    const logout = () => {
-      setToken(null);
-      setUser(null);
-      localStorage.removeItem('authToken');
-      navigate('/login');
-    };
-  
-    const fetchUser = async (currentToken) => {
-      try {
-        const response = await axios.get('/api/v1/users/self', {
-          headers: { 'X-Token': currentToken || token }
-        });
-        setUser(response.data.result);
-      } catch (error) {
-        console.error('Ошибка при получении данных пользователя:', error);
-        logout();
-      }
-    };
-  
+  useAuth() {
+    const [authState, setAuthState] = useState(this.store.getState().auth);
+
     useEffect(() => {
-      if (token) {
-        fetchUser();
-      }
-    }, [token]);
-  
-    return { token, user, login, logout };
-  };
+      const unsubscribe = this.store.subscribe(() => {
+        setAuthState(this.store.getState().auth);
+      });
+      return unsubscribe;
+    }, []);
+
+    const login = async (username, password) => {
+      await this.store.actions.auth.login(username, password);
+    };
+
+    const logout = () => {
+      this.store.actions.auth.logout();
+    };
+
+    return {
+      user: authState.user,
+      token: authState.token,
+      isAuthenticated: authState.isAuthenticated,
+      login,
+      logout
+    };
+  }
+}
+
+export const useAuth = () => {
+  const store = useContext(StoreContext);
+  const authHook = new UseAuth(store);
+  return authHook.useAuth();
+};

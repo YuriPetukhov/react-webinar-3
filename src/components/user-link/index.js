@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './style.css';
-import { useAuth } from '../../store/auth-cont';
+import { StoreContext } from '../../store/context';
 
 const UserLink = () => {
-  const { user } = useAuth();
+  const store = useContext(StoreContext);
+  const [authState, setAuthState] = useState(store.getState().auth);
+
+  useEffect(() => {
+    const unsubscribe = store.subscribe(() => {
+      setAuthState(store.getState().auth);
+    });
+    return unsubscribe;
+  }, [store]);
+
+  if (!authState.isAuthenticated || !authState.user) {
+    return null;
+  }
 
   return (
     <nav className="UserLink">
-          {user && (
-            <Link to={`/profile`}>{user.profile.name}</Link>
-          )}
+      <Link to="/profile">{authState.user.profile?.name || authState.user.email}</Link>
     </nav>
   );
 };
