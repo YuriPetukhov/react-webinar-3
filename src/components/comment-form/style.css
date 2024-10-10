@@ -1,0 +1,17 @@
+.CommentForm {
+  padding: 15px 0;
+}
+
+.CommentForm-row {
+  padding-bottom: 10px;
+}
+
+.CommentForm-label {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.CommentForm-textarea {
+  border: 1px solid #666;
+  width: 100%;
+}

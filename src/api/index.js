@@ -41,6 +41,36 @@ class APIService {
       delete this.defaultHeaders[name];
     }
   }
+
+  /**
+   * Создание комментария
+   * @param data
+   * @return {Promise<{}>}
+   */
+  async createComment(data) {
+    const res = await this.request({
+      url: '/api/v1/comments',
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    return res.data.result;
+  }
+
+  /**
+   * Ответ на комментарий
+   * @param commentId
+   * @param data
+   * @return {Promise<{}>}
+   */
+  async replyComment(commentId, data) {
+    const res = await this.request({
+      url: `/api/v1/comments/${commentId}/reply`,
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    return res.data.result;
+  }
 }
+
 
 export default APIService;

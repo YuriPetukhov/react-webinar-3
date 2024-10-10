@@ -11,17 +11,16 @@ import LocaleSelect from '../../containers/locale-select';
 import TopHead from '../../containers/top-head';
 
 function Main() {
+  const { t, lang } = useTranslate();
   const store = useStore();
 
   useInit(
     async () => {
       await Promise.all([store.actions.catalog.initParams(), store.actions.categories.load()]);
     },
-    [],
+    [lang],
     true,
   );
-
-  const { t } = useTranslate();
 
   return (
     <PageLayout>

@@ -1,0 +1,32 @@
+.CommentCard {
+  padding: 12px 0;
+}
+
+.CommentCard-row {
+
+}
+
+.CommentCard-author {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.CommentCard-date {
+  font-size: 12px;
+  color: #666666;
+}
+
+.CommentCard-text {
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.CommentCard-answer {
+  color: #0087E9;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.CommentForm-login-link {
+  color: #0087E9;
+}

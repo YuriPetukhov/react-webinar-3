@@ -14,6 +14,7 @@ import TopHead from '../../containers/top-head';
 import ProfileCard from '../../components/profile-card';
 
 function Profile() {
+  const { t } = useTranslate();
   const store = useStore();
 
   useInit(() => {
@@ -24,8 +25,6 @@ function Profile() {
     profile: state.profile.data,
     waiting: state.profile.waiting,
   }));
-
-  const { t } = useTranslate();
 
   return (
     <PageLayout>

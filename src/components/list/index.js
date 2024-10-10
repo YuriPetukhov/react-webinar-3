@@ -1,13 +1,15 @@
 import { memo } from 'react';
 import PropTypes from 'prop-types';
-import Item from '../item';
+import { cn as bem } from '@bem-react/classname';
 import './style.css';
 
 function List({ list, renderItem = item => {} }) {
+  const cn = bem('List');
+
   return (
-    <div className="List">
+    <div className={cn()}>
       {list.map(item => (
-        <div key={item._id} className="List-item">
+        <div key={item._id} className={cn('item')}>
           {renderItem(item)}
         </div>
       ))}
