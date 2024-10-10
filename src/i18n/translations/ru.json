@@ -25,9 +25,11 @@
   "session.signOut": "Выход",
   "comments.title": "Комментарии",
   "comments.answer": "Ответить",
+  "comments.logIn": "Войдите",
+  "comments.hasAccess": ", чтобы иметь возможность комментировать",
   "comments.newComment": "Новый комментарий",
   "comments.newAnswer": "Новый ответ",
   "comments.send": "Отправить",
   "comments.cancel": "Отмена",
-  "comments.LogInToReply": "Войти, чтобы ответить"
+  "comments.LogInToReply": "Ответить"
 }

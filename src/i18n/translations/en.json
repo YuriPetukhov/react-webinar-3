@@ -23,9 +23,11 @@
   "session.signOut": "Sign Out",
   "comments.title": "Comments",
   "comments.answer": "To Answer",
+  "comments.logIn": "Sign in",
+  "comments.hasAccess": "to leave a comment",
   "comments.newComment": "New comment",
   "comments.newAnswer": "New answer",
   "comments.send": "Send",
   "comments.cancel": "Cancel",
-  "comments.LogInToReply": "Log in to reply"
+  "comments.LogInToReply": "Reply"
 }
