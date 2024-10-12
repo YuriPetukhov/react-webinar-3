@@ -10,7 +10,7 @@ import Spinner from '../../components/spinner';
 import TitleWithCount from '../../components/title-with-count';
 import Comments from '../../components/comments';
 import NewCommentForm from '../../components/new-comment-form';
-import commentsListToTree from '../../utils/comments-list-to-tree';
+import listToTree from '../../utils/list-to-tree';
 
 const LOGIN_PATH = '/login';
 
@@ -58,7 +58,7 @@ function CommentsList({ articleId }) {
     return state.session && state.session.user && state.session.user._id;
   });
 
-  const commentsList = useMemo(() => commentsListToTree(reduxSelect.list), [reduxSelect.list]);
+  const commentsList = useMemo(() => listToTree(reduxSelect.list, '_id'), [reduxSelect.list]);
 
   return (
     <Spinner active={reduxSelect.waiting}>
@@ -74,6 +74,7 @@ function CommentsList({ articleId }) {
         submitHandler={callbacks.addAnswer}
         authorizedUsername={select.username}
         authorizedUserId={authorizedUserId}
+        waiting={reduxSelect.waiting}
       />
       {reduxSelect.activeComment === null && (
         <NewCommentForm

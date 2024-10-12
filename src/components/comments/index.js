@@ -21,25 +21,32 @@ function Comments(props) {
   } = props;
 
   const cn = bem('Comments');
+  console.log('list', list);
 
   return (
     <>
       {list.map(comment => (
-        <div key={comment._id} className={cn(!level && 'firstLevel')} style={{ marginLeft: level >= 4 ? '0px' : `${level * 20}px` }}>
-          <CommentCard
-            t={t}
-            id={comment._id}
-            author={comment.author.profile.name}
-            authorId={comment.author._id}
-            date={formatDate(comment.dateCreate)}
-            text={comment.text}
-            answerLabel={t('comments.answer')}
-            onAnswerClick={() => setActiveComment(comment._id)}
-            sessionExists={sessionExists}
-            loginPath={loginPath}
-            authorizedUsername={authorizedUsername}
-            authorizedUserId={authorizedUserId}
-          />
+        <div
+          key={comment._id}
+          className={cn(!level && 'firstLevel')}
+          style={{ marginLeft: level >= 5 ? '0px' : `${level * 20}px` }}
+        >
+          {comment.author && comment.author.profile ? (
+            <CommentCard
+              t={t}
+              id={comment._id}
+              author={comment.author.profile.name}
+              authorId={comment.author._id}
+              date={formatDate(comment.dateCreate)}
+              text={comment.text}
+              answerLabel={t('comments.answer')}
+              onAnswerClick={() => setActiveComment(comment._id)}
+              sessionExists={sessionExists}
+              loginPath={loginPath}
+              authorizedUsername={authorizedUsername}
+              authorizedUserId={authorizedUserId}
+            />
+          ) : null}
           {!!comment.children.length && (
             <Comments {...props} list={comment.children} level={level + 1} />
           )}
@@ -50,7 +57,7 @@ function Comments(props) {
               loginPath={loginPath}
               type="answer"
               cancelHandler={() => setActiveComment(null)}
-              submitHandler={(text) => submitHandler(text, comment._id)}
+              submitHandler={text => submitHandler(text, comment._id)}
               id={`form-${comment._id}`}
             />
           )}
@@ -63,7 +70,7 @@ function Comments(props) {
           loginPath={loginPath}
           type="comment"
           cancelHandler={() => setActiveComment(null)}
-          submitHandler={(text) => submitHandler(text, null)}
+          submitHandler={text => submitHandler(text, null)}
           id="new-comment-form"
         />
       )}
