@@ -37,9 +37,15 @@ export default {
    * @param commentText
    * @param id
    * @param type
+   * @param authorId
    */
-  addComment: (username, commentText, id, type) => {
+  addComment: (username, commentText, id, type, authorId) => {
     return async (dispatch, getState, services) => {
+      // Проверка на пустой комментарий (включая пробелы)
+      if (!commentText.trim()) {
+        return; // Не отправляем пустой комментарий
+      }
+
       dispatch({ type: 'comments/adding-comment-start' });
 
       const token = localStorage.getItem('token');
@@ -50,8 +56,9 @@ export default {
           method: 'POST',
           headers: { [services.config.store.modules.session.tokenHeader]: token },
           body: JSON.stringify({
-            text: commentText,
+            text: commentText.trim(), // Убираем пробелы
             parent: { _id: id, _type: type },
+            authorId: authorId,
           }),
         });
 
@@ -70,13 +77,20 @@ export default {
           isDeleted,
           author: {
             profile: { name: username },
+            id: authorId,
           },
           parent: { _id: parentId, _type: parentType },
         };
 
+        // Добавление комментария в список
         dispatch({
           type: 'comments/adding-comment-success',
           payload: { data },
+        });
+
+        dispatch({
+          type: 'comments/add-comment-to-list',
+          payload: { comment: data },
         });
       } catch (e) {
         dispatch({ type: 'comments/adding-comment-error' });

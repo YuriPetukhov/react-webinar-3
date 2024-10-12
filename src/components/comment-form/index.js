@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
@@ -16,6 +16,13 @@ function CommentForm({
 }) {
   const [text, setText] = useState('');
   const cn = bem('CommentForm');
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, []);
 
   if (!sessionExists)
     return (
@@ -30,7 +37,7 @@ function CommentForm({
     );
 
   return (
-    <div className={cn()}>
+    <div className={cn()} ref={formRef}>
       <form
         onSubmit={e => {
           e.preventDefault();

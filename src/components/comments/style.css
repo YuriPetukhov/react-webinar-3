@@ -1,7 +1,12 @@
 .Comments {
-  padding-left: 30px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .Comments-firstLevel {
   padding: 0 40px;
+}
+
+.Comments-maxDepth {
+  padding-left: 0;
 }

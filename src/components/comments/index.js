@@ -16,6 +16,8 @@ function Comments(props) {
     activeComment,
     setActiveComment,
     submitHandler,
+    authorizedUsername,
+    authorizedUserId,
   } = props;
 
   const cn = bem('Comments');
@@ -23,17 +25,20 @@ function Comments(props) {
   return (
     <>
       {list.map(comment => (
-        <div key={comment._id} className={cn(!level && 'firstLevel')}>
+        <div key={comment._id} className={cn(!level && 'firstLevel')} style={{ marginLeft: level >= 4 ? '0px' : `${level * 20}px` }}>
           <CommentCard
             t={t}
             id={comment._id}
             author={comment.author.profile.name}
+            authorId={comment.author._id}
             date={formatDate(comment.dateCreate)}
             text={comment.text}
             answerLabel={t('comments.answer')}
             onAnswerClick={() => setActiveComment(comment._id)}
             sessionExists={sessionExists}
             loginPath={loginPath}
+            authorizedUsername={authorizedUsername}
+            authorizedUserId={authorizedUserId}
           />
           {!!comment.children.length && (
             <Comments {...props} list={comment.children} level={level + 1} />
@@ -76,6 +81,8 @@ Comments.propTypes = {
   activeComment: PropTypes.string,
   setActiveComment: PropTypes.func,
   submitHandler: PropTypes.func,
+  authorizedUsername: PropTypes.string,
+  authorizedUserId: PropTypes.string,
 };
 
 export default memo(Comments);

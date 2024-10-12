@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import PropTypes from 'prop-types';
@@ -9,6 +9,7 @@ import './style.css';
 function CommentCard({
   id,
   author,
+  authorId,
   date,
   text,
   onAnswerClick,
@@ -16,15 +17,19 @@ function CommentCard({
   sessionExists,
   loginPath,
   t,
+  authorizedUserId,
 }) {
-  const { pathname } = useLocation();
+  const location = useLocation();
   const cn = bem('CommentCard');
+
+  const authorIdToUse = authorId || authorizedUserId;
+  const isAuthorAuthorized = authorIdToUse === authorizedUserId;
 
   return (
     <div className={cn()}>
       <div className={cn('row')}>
         <SideLayout>
-          <span className={cn('author')}>{author}</span>
+          <span className={cn('author', { authorized: isAuthorAuthorized })}>{author}</span>
           <span className={cn('date')}>{date}</span>
         </SideLayout>
       </div>
@@ -33,8 +38,8 @@ function CommentCard({
       </div>
       <div className={cn('row')}>
         {sessionExists ? (
-          <HashLink smooth to={`${pathname}#${id}`}>
-            <span className={cn('answer')} onClick={() => onAnswerClick()}>
+          <HashLink smooth to={`${location.pathname}#${id}`}>
+            <span className={cn('answer')} onClick={onAnswerClick}>
               {answerLabel}
             </span>
           </HashLink>
@@ -53,14 +58,17 @@ function CommentCard({
 }
 
 CommentCard.propTypes = {
-  id: PropTypes.string,
-  author: PropTypes.string,
-  date: PropTypes.string,
-  text: PropTypes.string,
-  onAnswerClick: PropTypes.func,
-  answerLabel: PropTypes.string,
-  sessionExists: PropTypes.bool,
-  loginPath: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  authorId: PropTypes.string,
+  date: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  onAnswerClick: PropTypes.func.isRequired,
+  answerLabel: PropTypes.string.isRequired,
+  sessionExists: PropTypes.bool.isRequired,
+  loginPath: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
+  authorizedUserId: PropTypes.string.isRequired,
 };
 
 export default memo(CommentCard);

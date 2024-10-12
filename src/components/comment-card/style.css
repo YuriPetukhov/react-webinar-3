@@ -2,13 +2,14 @@
   padding: 12px 0;
 }
 
-.CommentCard-row {
-
-}
 
 .CommentCard-author {
   font-size: 12px;
   font-weight: 700;
+}
+
+.CommentCard-author_authorized {
+  color: #666666;
 }
 
 .CommentCard-date {

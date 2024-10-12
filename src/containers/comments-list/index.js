@@ -54,6 +54,10 @@ function CommentsList({ articleId }) {
     ),
   };
 
+  const authorizedUserId = useSelector(state => {
+    return state.session && state.session.user && state.session.user._id;
+  });
+
   const commentsList = useMemo(() => commentsListToTree(reduxSelect.list), [reduxSelect.list]);
 
   return (
@@ -68,6 +72,8 @@ function CommentsList({ articleId }) {
         activeComment={reduxSelect.activeComment}
         setActiveComment={callbacks.setActiveComment}
         submitHandler={callbacks.addAnswer}
+        authorizedUsername={select.username}
+        authorizedUserId={authorizedUserId}
       />
       {reduxSelect.activeComment === null && (
         <NewCommentForm
