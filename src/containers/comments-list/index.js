@@ -74,7 +74,6 @@ function CommentsList({ articleId }) {
         submitHandler={callbacks.addAnswer}
         authorizedUsername={select.username}
         authorizedUserId={authorizedUserId}
-        waiting={reduxSelect.waiting}
       />
       {reduxSelect.activeComment === null && (
         <NewCommentForm

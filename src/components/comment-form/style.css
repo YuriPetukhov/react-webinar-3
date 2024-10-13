@@ -1,17 +1,28 @@
+
 .CommentForm {
   padding: 15px 0;
+  font-size: 16px;
+  text-decoration: none;
 }
 
 .CommentForm-row {
   padding-bottom: 10px;
+  text-decoration: none;
 }
 
 .CommentForm-label {
   font-size: 12px;
   font-weight: 700;
+  text-decoration: none;
 }
 
 .CommentForm-textarea {
   border: 1px solid #666;
   width: 100%;
+  text-decoration: none;
+}
+
+.CommentForm-link {
+  color: #0087E9;
+  font-size: 16px;
 }

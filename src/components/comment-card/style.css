@@ -1,7 +1,10 @@
+.CommentCard a {
+  text-decoration: none;
+}
+
 .CommentCard {
   padding: 12px 0;
 }
-
 
 .CommentCard-author {
   font-size: 12px;
@@ -26,8 +29,11 @@
   color: #0087E9;
   cursor: pointer;
   font-size: 12px;
+  text-decoration: none;
 }
 
-.CommentForm-login-link {
+.CommentCard-login-link {
   color: #0087E9;
+  font-size: 12px;
 }
+
